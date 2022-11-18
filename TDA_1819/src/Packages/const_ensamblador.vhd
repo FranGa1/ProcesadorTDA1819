@@ -1,18 +1,18 @@
 
 -- Paquete "const_ensamblador":
--- Descripción: Aquí se definen todos los sistemas de representación válidos soportados 
+-- Descripciï¿½n: Aquï¿½ se definen todos los sistemas de representaciï¿½n vï¿½lidos soportados 
 -- por el ensamblador (decimal, binario y hexadecimal) para asignar valores tanto a las
--- variables del programa como a los operandos inmediatos. También se incluyen todos 
--- los dígitos posibles que posee cada sistema para que el ensamblador pueda verificar
--- su adecuada utilización por parte del usuario. Además, se encuentran especificados 
--- todos los tipos de datos válidos para que el ensamblador pueda comprobar su correcta 
--- definición en el programa; el tamaño en memoria de cada tipo de datos para poder 
+-- variables del programa como a los operandos inmediatos. Tambiï¿½n se incluyen todos 
+-- los dï¿½gitos posibles que posee cada sistema para que el ensamblador pueda verificar
+-- su adecuada utilizaciï¿½n por parte del usuario. Ademï¿½s, se encuentran especificados 
+-- todos los tipos de datos vï¿½lidos para que el ensamblador pueda comprobar su correcta 
+-- definiciï¿½n en el programa; el tamaï¿½o en memoria de cada tipo de datos para poder 
 -- almacenar los valores de sus respectivas variables en la memoria de datos; y por 
--- último los nombres de todas las instrucciones posibles del repertorio soportado por 
--- este procesador junto con su código de operación y el tamaño total de cada 
--- instrucción en memoria a fin de que el ensamblador verifique si existen errores de 
--- sintaxis en su definición por parte del usuario y luego pueda almacenar en la 
--- memoria de instrucciones tanto el opcode como los operandos de dicha instrucción. 
+-- ï¿½ltimo los nombres de todas las instrucciones posibles del repertorio soportado por 
+-- este procesador junto con su cï¿½digo de operaciï¿½n y el tamaï¿½o total de cada 
+-- instrucciï¿½n en memoria a fin de que el ensamblador verifique si existen errores de 
+-- sintaxis en su definiciï¿½n por parte del usuario y luego pueda almacenar en la 
+-- memoria de instrucciones tanto el opcode como los operandos de dicha instrucciï¿½n. 
 
 
 library TDA_1819;
@@ -35,7 +35,7 @@ PACKAGE const_ensamblador is
 	CONSTANT CANT_OFFSETS:		INTEGER := 10;
 	CONSTANT CANT_INSTTD:		INTEGER := 13;
 	CONSTANT CANT_INSTAR:		INTEGER := 20;
-	CONSTANT CANT_INSTLD:		INTEGER := 15;
+	CONSTANT CANT_INSTLD:		INTEGER := 16;
 	CONSTANT CANT_INSTTC:		INTEGER := 7;
 	CONSTANT CANT_INSTCT:		INTEGER := 2;
 	
@@ -72,9 +72,9 @@ PACKAGE const_ensamblador is
 	CONSTANT INSTAR_CODES:		instar_code_array(1 to CANT_INSTAR) := (DADD, DADDI, DADDU, DADDUI, ADDF, DSUB, DSUBU, SUBF, DMUL, DMULU, MULF, DDIV, DDIVU, DIVF, SLT, SLTI, LTF, LEF, EQF, NEGR);
 	CONSTANT INSTAR_SIZES:		instar_size_array(1 to CANT_INSTAR) := (5, 8, 5, 8, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 8, 4, 4, 4, 4);
 	
-	CONSTANT INSTLD_NAMES: 		instld_name_array(1 to CANT_INSTLD) := ("and  ", "andi ", "or   ", "ori  ", "xor  ", "xori ", "not  ", "dsl  ", "dsli ", "dsr  ", "dsri ", "dsls ", "dslsi", "dsrs ", "dsrsi");
-	CONSTANT INSTLD_CODES:		instld_code_array(1 to CANT_INSTLD) := (ANDR, ANDI, ORR, ORI, XORR, XORI, NOTR, DSL, DSLI, DSR, DSRI, DSLS, DSLSI, DSRS, DSRSI);
-	CONSTANT INSTLD_SIZES:		instld_size_array(1 to CANT_INSTLD) := (5, 8, 5, 8, 5, 8, 4, 5, 8, 5, 8, 5, 8, 5, 8);
+	CONSTANT INSTLD_NAMES: 		instld_name_array(1 to CANT_INSTLD) := ("and  ", "andi ", "or   ", "ori  ", "xor  ", "xori ", "xnor ", "not  ", "dsl  ", "dsli ", "dsr  ", "dsri ", "dsls ", "dslsi", "dsrs ", "dsrsi");
+	CONSTANT INSTLD_CODES:		instld_code_array(1 to CANT_INSTLD) := (ANDR, ANDI, ORR, ORI, XORR, XORI, XNORR, NOTR, DSL, DSLI, DSR, DSRI, DSLS, DSLSI, DSRS, DSRSI);
+	CONSTANT INSTLD_SIZES:		instld_size_array(1 to CANT_INSTLD) := (5, 8, 5, 8, 5, 8, 5, 4, 5, 8, 5, 8, 5, 8, 5, 8);
 	
 	CONSTANT INSTTC_NAMES: 		insttc_name_array(1 to CANT_INSTTC) := ("jmp ", "beq ", "bne ", "beqz", "bnez", "bfpt", "bfpf");
 	CONSTANT INSTTC_CODES:		insttc_code_array(1 to CANT_INSTTC) := (JMP, BEQ, BNE, BEQZ, BNEZ, BFPT, BFPF);

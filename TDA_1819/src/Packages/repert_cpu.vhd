@@ -1,14 +1,14 @@
 
 -- Paquete "repert_cpu":
--- Descripción: Aquí se define el repertorio de instrucciones soportado por el procesador
--- diseñado para este proyecto, junto con el código de operación asignado a cada una de 
+-- Descripciï¿½n: Aquï¿½ se define el repertorio de instrucciones soportado por el procesador
+-- diseï¿½ado para este proyecto, junto con el cï¿½digo de operaciï¿½n asignado a cada una de 
 -- las mismas a fin de que el ensamblador pueda codificarla de manera tal que resulte 
--- inteligible para la unidad de control de la CPU, la cual se encargará de interpretarlo 
--- y, a partir de él, determinar las acciones a realizar a continuación para que el 
--- procesador pueda ejecutar dicha instrucción. Téngase en cuenta que todas las 
--- instrucciones vinculadas al manejo de subrutinas, interrupciones, pila y periféricos 
--- de entrada/salida aún no han sido implementadas, pero está previsto incorporarlas para 
--- una futura versión del proyecto.
+-- inteligible para la unidad de control de la CPU, la cual se encargarï¿½ de interpretarlo 
+-- y, a partir de ï¿½l, determinar las acciones a realizar a continuaciï¿½n para que el 
+-- procesador pueda ejecutar dicha instrucciï¿½n. Tï¿½ngase en cuenta que todas las 
+-- instrucciones vinculadas al manejo de subrutinas, interrupciones, pila y perifï¿½ricos 
+-- de entrada/salida aï¿½n no han sido implementadas, pero estï¿½ previsto incorporarlas para 
+-- una futura versiï¿½n del proyecto.
 
 
 LIBRARY IEEE;
@@ -50,7 +50,7 @@ PACKAGE repert_cpu is
 	CONSTANT TI:			std_logic_vector(7 downto 0) := "00010000";
 
 	
--- Aritméticas
+-- Aritmï¿½ticas
 
 	-- DADD rd, rf, rg	
 	CONSTANT DADD:			std_logic_vector(7 downto 0) := "00011000";
@@ -94,7 +94,7 @@ PACKAGE repert_cpu is
 	CONSTANT NEGR:			std_logic_vector(7 downto 0) := "00101011";
 
 	  
--- Lógicas 
+-- Lï¿½gicas 
 
 	-- AND rd, rf, rg
 	CONSTANT ANDR:			std_logic_vector(7 downto 0) := "00110000";		
@@ -110,7 +110,8 @@ PACKAGE repert_cpu is
 	CONSTANT XORI:			std_logic_vector(7 downto 0) := "00110101";
 	-- NOT rd, rf
 	CONSTANT NOTR:			std_logic_vector(7 downto 0) := "00110110";
-	
+	-- XNOR rd, rf, rg
+	CONSTANT XNORR:			std_logic_vector(7 downto 0) := "00110111";
 
 -- Desplazamiento de bits
 

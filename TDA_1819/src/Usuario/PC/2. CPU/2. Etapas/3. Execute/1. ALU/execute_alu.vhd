@@ -1,58 +1,58 @@
 
 -- Entidad "execute_alu":
--- Descripción: Aquí se define la funcionalidad correspondiente a la unidad aritmético-lógica
--- (ALU) dentro de la etapa de ejecución del pipeline, por lo que en esta ALU se ejecutarán 
--- todas las operaciones aritmético-lógicas que no involucren operandos en punto flotante: 
--- sumas, restas, multiplicaciones y divisiones enteras, saltos condicionales, operaciones and, 
--- or, not y xor, comparaciones y desplazamiento de bits. Una vez finalizada la operación en 
--- cuestión, accederá al Registro de Banderas del procesador asociado a esta ALU (FLAGS) con el 
--- objetivo de actualizarlo con el estado de la última operación ejecutada. A continuación, si 
--- llegara a ser necesario, se dirige nuevamente a este registro para obtener de él toda la 
--- información requerida para determinar algún rumbo en particular entre dos acciones posibles. 
--- Por ejemplo, en caso de un salto condicional, indudablemente alguna de las banderas será 
--- crucial para decidir si efectivamente dicho salto debe ser tomado o el programa puede 
--- continuar con su ejecución normal. También cuenta con la capacidad de poder acceder al 
--- Puntero de Instrucciones para actualizarlo si llegara a ocurrir una alteración en el flujo de 
--- ejecución normal del programa (salto tomado). Finalmente, si correspondiera, envía al 
--- administrador de la etapa de ejecución del pipeline el resultado final de la operación 
--- aritmético-lógica llevada a cabo en esta ALU para que éste disponga de él como juzgue 
--- conveniente y necesario. Recordar que, independientemente de la naturaleza de la operación en 
--- cuestión, una ejecución completa en esta unidad requerirá solamente un ciclo de reloj.
+-- Descripciï¿½n: Aquï¿½ se define la funcionalidad correspondiente a la unidad aritmï¿½tico-lï¿½gica
+-- (ALU) dentro de la etapa de ejecuciï¿½n del pipeline, por lo que en esta ALU se ejecutarï¿½n
+-- todas las operaciones aritmï¿½tico-lï¿½gicas que no involucren operandos en punto flotante:
+-- sumas, restas, multiplicaciones y divisiones enteras, saltos condicionales, operaciones and,
+-- or, not y xor, comparaciones y desplazamiento de bits. Una vez finalizada la operaciï¿½n en
+-- cuestiï¿½n, accederï¿½ al Registro de Banderas del procesador asociado a esta ALU (FLAGS) con el
+-- objetivo de actualizarlo con el estado de la ï¿½ltima operaciï¿½n ejecutada. A continuaciï¿½n, si
+-- llegara a ser necesario, se dirige nuevamente a este registro para obtener de ï¿½l toda la
+-- informaciï¿½n requerida para determinar algï¿½n rumbo en particular entre dos acciones posibles.
+-- Por ejemplo, en caso de un salto condicional, indudablemente alguna de las banderas serï¿½
+-- crucial para decidir si efectivamente dicho salto debe ser tomado o el programa puede
+-- continuar con su ejecuciï¿½n normal. Tambiï¿½n cuenta con la capacidad de poder acceder al
+-- Puntero de Instrucciones para actualizarlo si llegara a ocurrir una alteraciï¿½n en el flujo de
+-- ejecuciï¿½n normal del programa (salto tomado). Finalmente, si correspondiera, envï¿½a al
+-- administrador de la etapa de ejecuciï¿½n del pipeline el resultado final de la operaciï¿½n
+-- aritmï¿½tico-lï¿½gica llevada a cabo en esta ALU para que ï¿½ste disponga de ï¿½l como juzgue
+-- conveniente y necesario. Recordar que, independientemente de la naturaleza de la operaciï¿½n en
+-- cuestiï¿½n, una ejecuciï¿½n completa en esta unidad requerirï¿½ solamente un ciclo de reloj.
 -- Procesos:
--- Main: En primer lugar, recibe la señal del administrador de la etapa de ejecución del
--- pipeline para comenzar la ejecución de la operación aritmético-lógica requerida por la
--- instrucción actual. También obtendrá toda la información necesaria para determinar el tipo
--- de operación a realizar y, en consecuencia, los procedimientos a invocar: si la operación
--- es nula, directamente cancelará el uso de la ALU para esta instrucción; en caso contrario,
--- llevará a cabo la operación y actualizará el Registro FLAGS para luego, si llegara a ser
--- necesario, leerlo para adoptar alguna decisión en función de su estado (actualizar un 
+-- Main: En primer lugar, recibe la seï¿½al del administrador de la etapa de ejecuciï¿½n del
+-- pipeline para comenzar la ejecuciï¿½n de la operaciï¿½n aritmï¿½tico-lï¿½gica requerida por la
+-- instrucciï¿½n actual. Tambiï¿½n obtendrï¿½ toda la informaciï¿½n necesaria para determinar el tipo
+-- de operaciï¿½n a realizar y, en consecuencia, los procedimientos a invocar: si la operaciï¿½n
+-- es nula, directamente cancelarï¿½ el uso de la ALU para esta instrucciï¿½n; en caso contrario,
+-- llevarï¿½ a cabo la operaciï¿½n y actualizarï¿½ el Registro FLAGS para luego, si llegara a ser
+-- necesario, leerlo para adoptar alguna decisiï¿½n en funciï¿½n de su estado (actualizar un
 -- registro con un determinado valor, tomar un salto, etc.). Finalmente, si no se tratara de
--- una instrucción de salto condicional, este proceso enviará al administrador el resultado
--- de la operación para que éste a su vez lo haga llegar a las siguientes etapas del pipeline
--- según sea necesario.
+-- una instrucciï¿½n de salto condicional, este proceso enviarï¿½ al administrador el resultado
+-- de la operaciï¿½n para que ï¿½ste a su vez lo haga llegar a las siguientes etapas del pipeline
+-- segï¿½n sea necesario.
 -- Procedimientos y funciones:
 -- alu(): Este procedimiento lleva a cabo la tarea fundamental de esta ALU: ejecutar la
--- operación aritmético-lógica requerida por la instrucción actual (suma, resta, multiplicación,
--- división, or, and, not, xor, desplazamiento de bits, etc.), ya sea para posteriormente 
--- escribir su resultado en el banco de registros en la etapa "writeback" o bien para utilizarlo 
--- internamente para un salto condicional o una comparación.
+-- operaciï¿½n aritmï¿½tico-lï¿½gica requerida por la instrucciï¿½n actual (suma, resta, multiplicaciï¿½n,
+-- divisiï¿½n, or, and, not, xor, desplazamiento de bits, etc.), ya sea para posteriormente
+-- escribir su resultado en el banco de registros en la etapa "writeback" o bien para utilizarlo
+-- internamente para un salto condicional o una comparaciï¿½n.
 -- setFlagsRegister(): Actualiza algunas de las banderas del registro FLAGS con los atributos
--- del estado correspondiente a la última operación aritmético-lógica ejecutada: cero (flag Z), 
--- negativo (flag S), overflow (flag O), acarreo (flag C), acarreo auxiliar (flag A) y paridad 
--- (flag P). Dichas banderas pueden ser muy importantes para tomar una eventual decisión
--- respecto a un salto condicional o una comparación (por ejemplo, el flag Z permitiría determinar
--- si los operandos de la última operación ejecutada eran iguales; el flag S, si el primero era
+-- del estado correspondiente a la ï¿½ltima operaciï¿½n aritmï¿½tico-lï¿½gica ejecutada: cero (flag Z),
+-- negativo (flag S), overflow (flag O), acarreo (flag C), acarreo auxiliar (flag A) y paridad
+-- (flag P). Dichas banderas pueden ser muy importantes para tomar una eventual decisiï¿½n
+-- respecto a un salto condicional o una comparaciï¿½n (por ejemplo, el flag Z permitirï¿½a determinar
+-- si los operandos de la ï¿½ltima operaciï¿½n ejecutada eran iguales; el flag S, si el primero era
 -- menor al segundo; etc.).
 -- getAndUseFlagsRegister(): Lee las banderas del registro FLAGS para obtener los atributos del
--- estado correspondiente a la última operación aritmético-lógica, ya actualizados en el
--- procedimiento anterior. A partir de los datos leídos, se tomará aquí la decisión en cuestión en
--- función de la instrucción ejecutada: si es una comparación, se le enviará al administrador el
--- valor que corresponda con el cual la etapa "writeback" deberá actualizar el registro indicado
--- en la instrucción; en cambio, si es una instrucción de transferencia de control, deberá 
--- determinarse si el salto será efectivamente tomado, en caso afirmativo se deberá acceder al 
--- Puntero de Instrucciones para actualizarlo con la dirección de salto para que el programa pueda 
--- continuar su ejecución desde allí, en caso contrario no será necesario realizar ninguna acción, 
--- permitiendo que el programa prosiga ejecutándose normalmente.
+-- estado correspondiente a la ï¿½ltima operaciï¿½n aritmï¿½tico-lï¿½gica, ya actualizados en el
+-- procedimiento anterior. A partir de los datos leï¿½dos, se tomarï¿½ aquï¿½ la decisiï¿½n en cuestiï¿½n en
+-- funciï¿½n de la instrucciï¿½n ejecutada: si es una comparaciï¿½n, se le enviarï¿½ al administrador el
+-- valor que corresponda con el cual la etapa "writeback" deberï¿½ actualizar el registro indicado
+-- en la instrucciï¿½n; en cambio, si es una instrucciï¿½n de transferencia de control, deberï¿½
+-- determinarse si el salto serï¿½ efectivamente tomado, en caso afirmativo se deberï¿½ acceder al
+-- Puntero de Instrucciones para actualizarlo con la direcciï¿½n de salto para que el programa pueda
+-- continuar su ejecuciï¿½n desde allï¿½, en caso contrario no serï¿½ necesario realizar ninguna acciï¿½n,
+-- permitiendo que el programa prosiga ejecutï¿½ndose normalmente.
 
 
 library TDA_1819;
@@ -64,14 +64,14 @@ LIBRARY IEEE;
 
 USE std.textio.all;
 use ieee.NUMERIC_STD.all;
-USE IEEE.std_logic_1164.all; 
+USE IEEE.std_logic_1164.all;
 
 
 
 
 entity execute_alu is
-	
-	port ( 
+
+	port (
 		BranchEXALUtoSM		: out state_branch;
 		DataRegInEXALU		: out std_logic_vector(31 downto 0);
 		EnableRegEXALURd	: out std_logic;
@@ -91,14 +91,14 @@ end execute_alu;
 architecture EXECUTE_ALU_ARCHITECTURE of execute_alu is
 
 
-	
+
 begin
-	
-	
+
+
 	Main: PROCESS
-	
-	VARIABLE First: BOOLEAN := true; 
-	VARIABLE Op: INTEGER;			 
+
+	VARIABLE First: BOOLEAN := true;
+	VARIABLE Op: INTEGER;
 	VARIABLE Sign: STD_LOGIC;
 	VARIABLE Uop1: UNSIGNED(31 downto 0);
 	VARIABLE Uop2: UNSIGNED(31 downto 0);
@@ -110,10 +110,10 @@ begin
 	VARIABLE needFlags: BOOLEAN;
 	VARIABLE isJumpOp: BOOLEAN;
 	VARIABLE jumpAddress: STD_LOGIC_VECTOR(15 downto 0);
-	
-	PROCEDURE alu IS  
-	
-	BEGIN  
+
+	PROCEDURE alu IS
+
+	BEGIN
 		jumpAddress := IDtoEXALU.address;
 		needFlags := false;
 		isJumpOp := false;
@@ -134,7 +134,7 @@ begin
 					Ures := Uop1 / Uop2;
 				WHEN EX_SLT =>
 					Ures := Uop1 - Uop2;
-					needFlags := true; 
+					needFlags := true;
 				WHEN EX_NEG =>
 					Ures := not(Uop1) + 1;
 				WHEN EX_AND =>
@@ -142,7 +142,9 @@ begin
 				WHEN EX_OR =>
 					Ures := Uop1 or Uop2;
 				WHEN EX_XOR =>
-					Ures := Uop1 xor Uop2;
+					Ures := not (Uop1 xor Uop2);
+				WHEN EX_XNOR =>
+					Ures := not (Uop1 xor Uop2);
 				WHEN EX_NOT =>
 					Ures := not(Uop1);
 				WHEN EX_DSL =>
@@ -167,19 +169,19 @@ begin
 					Ures := Uop1;
 					needFlags := true;
 					isJumpOp := true;
-				WHEN EX_BFPT =>	
+				WHEN EX_BFPT =>
 					Ures := Uop1;
 					needFlags := true;
 					isJumpOp := true;
-				WHEN EX_BFPF =>	
+				WHEN EX_BFPF =>
 					Ures := Uop1;
 					needFlags := true;
 					isJumpOp := true;
 				WHEN OTHERS =>
-					report "Error: la operación a ejecutar en la ALU no es válida"
+					report "Error: la operaciï¿½n a ejecutar en la ALU no es vï¿½lida"
 					severity FAILURE;
 			END CASE;
-		elsif (Sign = '1') then	
+		elsif (Sign = '1') then
 			Sop1 := signed(IDtoEXALU.op1);
 			Sop2 := signed(IDtoEXALU.op2);
 			CASE Op IS
@@ -204,13 +206,15 @@ begin
 					Sres := Sop1 or Sop2;
 				WHEN EX_XOR =>
 					Sres := Sop1 xor Sop2;
+				WHEN EX_XNOR =>
+					Sres := not (Sop1 xor Sop2);
 				WHEN EX_NOT =>
 					Sres := not(Sop1);
-				WHEN EX_DSL => 
+				WHEN EX_DSL =>
 					Sres(30 downto 0) := shift_left(Sop1(30 downto 0), to_integer(Sop2));
 					Sres(31) := Sop1(31);
 					Sres((to_integer(Sop2)-1) downto 0) := Sop1(30 downto 30-(to_integer(Sop2)-1));
-				WHEN EX_DSR => 
+				WHEN EX_DSR =>
 					Sres(30 downto 0) := shift_right(Sop1(30 downto 0), to_integer(Sop2));
 					Sres(31) := Sop1(31);
 					Sres(30 downto 30-(to_integer(Sop2)-1)) := Sop1((to_integer(Sop2)-1) downto 0);
@@ -229,21 +233,21 @@ begin
 				WHEN EX_BNEZ =>
 					Sres := Sop1;
 					needFlags := true;
-					isJumpOp := true; 
+					isJumpOp := true;
 				WHEN EX_BFPT =>
 					Sres := Sop1;
 					needFlags := true;
 					isJumpOp := true;
-				WHEN EX_BFPF =>	
+				WHEN EX_BFPF =>
 					Sres := Sop1;
 					needFlags := true;
 					isJumpOp := true;
 				WHEN OTHERS =>
-					report "Error: la operación a ejecutar en la ALU no es válida"
+					report "Error: la operaciï¿½n a ejecutar en la ALU no es vï¿½lida"
 					severity FAILURE;
 			END CASE;
 		else
-			report "Error: el signo de la operación a ejecutar en la ALU no es válido"
+			report "Error: el signo de la operaciï¿½n a ejecutar en la ALU no es vï¿½lido"
 			severity FAILURE;
 		end if;
 		if (Sign = '0') then
@@ -251,15 +255,15 @@ begin
 		elsif (Sign = '1') then
 			ResBin := std_logic_vector(Sres);
 		else
-			report "Error: el signo de la operación ejecutada en la ALU no es válido"
+			report "Error: el signo de la operaciï¿½n ejecutada en la ALU no es vï¿½lido"
 			severity FAILURE;
 		end if;
 	END alu;
-	
+
 	PROCEDURE setFlagsRegister IS
-	
+
 	VARIABLE cant1s: INTEGER := 0;
-	
+
 	BEGIN
 		DataRegInEXALU <= "ZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZ";
 		if (Sign = '0') then
@@ -451,7 +455,7 @@ begin
 					EnableRegEXALUWr <= '1';
 					WAIT FOR 1 ns;
 					EnableRegEXALUWr <= '0';
-					WAIT FOR 1 ns; 
+					WAIT FOR 1 ns;
 				WHEN EX_AND to EX_NOT =>
 					if (to_integer(unsigned(ResBin(31 downto 0))) = 0) then
 						DataRegInEXALU(FLAG_Z) <= '1';
@@ -475,7 +479,7 @@ begin
 					EnableRegEXALUWr <= '1';
 					WAIT FOR 1 ns;
 					EnableRegEXALUWr <= '0';
-					WAIT FOR 1 ns; 
+					WAIT FOR 1 ns;
 				WHEN EX_DSL to EX_DSR =>
 					if (to_integer(unsigned(ResBin(31 downto 0))) = 0) then
 						DataRegInEXALU(FLAG_Z) <= '1';
@@ -661,7 +665,7 @@ begin
 					EnableRegEXALUWr <= '0';
 					WAIT FOR 1 ns;
 				WHEN OTHERS =>
-					report "Error: la operación a ejecutar en la ALU no es válida"
+					report "Error: la operaciï¿½n a ejecutar en la ALU no es vï¿½lida"
 					severity FAILURE;
 			END CASE;
 		elsif (Sign = '1') then
@@ -754,7 +758,7 @@ begin
 					DataRegInEXALU(FLAG_S) <= ResBin(31);
 					if ((Sop1(31) = Sop2(31)) and (Sres(31) = '1')) then
 						DataRegInEXALU(FLAG_O) <= '1';
-					elsif ((Sop1(31) /= Sop2(31)) and (Sres(31) = '0')) then  
+					elsif ((Sop1(31) /= Sop2(31)) and (Sres(31) = '0')) then
 						DataRegInEXALU(FLAG_O) <= '1';
 					else
 						DataRegInEXALU(FLAG_O) <= '0';
@@ -784,7 +788,7 @@ begin
 					DataRegInEXALU(FLAG_S) <= ResBin(31);
 					if ((Sop1(31) = Sop2(31)) and (Sres(31) = '1')) then
 						DataRegInEXALU(FLAG_O) <= '1';
-					elsif ((Sop1(31) /= Sop2(31)) and (Sres(31) = '0')) then  
+					elsif ((Sop1(31) /= Sop2(31)) and (Sres(31) = '0')) then
 						DataRegInEXALU(FLAG_O) <= '1';
 					else
 						DataRegInEXALU(FLAG_O) <= '0';
@@ -840,7 +844,7 @@ begin
 					EnableRegEXALUWr <= '1';
 					WAIT FOR 1 ns;
 					EnableRegEXALUWr <= '0';
-					WAIT FOR 1 ns; 
+					WAIT FOR 1 ns;
 				WHEN EX_NEG =>
 					if (to_integer(signed(ResBin(31 downto 0))) = 0) then
 						DataRegInEXALU(FLAG_Z) <= '1';
@@ -905,7 +909,7 @@ begin
 					EnableRegEXALUWr <= '1';
 					WAIT FOR 1 ns;
 					EnableRegEXALUWr <= '0';
-					WAIT FOR 1 ns; 
+					WAIT FOR 1 ns;
 				WHEN EX_DSL to EX_DSR =>
 					if (to_integer(unsigned(ResBin(31 downto 0))) = 0) then
 						DataRegInEXALU(FLAG_Z) <= '1';
@@ -1099,17 +1103,17 @@ begin
 					EnableRegEXALUWr <= '0';
 					WAIT FOR 1 ns;
 				WHEN OTHERS =>
-					report "Error: la operación a ejecutar en la ALU no es válida"
+					report "Error: la operaciï¿½n a ejecutar en la ALU no es vï¿½lida"
 					severity FAILURE;
 			END CASE;
 		else
-			report "Error: el signo de la operación ejecutada en la ALU no es válido"
+			report "Error: el signo de la operaciï¿½n ejecutada en la ALU no es vï¿½lido"
 			severity FAILURE;
 		end if;
 	END setFlagsRegister;
-	
+
 	PROCEDURE getAndUseFlagsRegister IS
-		
+
 	BEGIN
 		EnableRegEXALURd <= '1';
 		WAIT FOR 1 ns;
@@ -1119,7 +1123,7 @@ begin
 			WHEN EX_SLT =>
 				ResBin := "ZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZ" & DataRegOutEXALU(FLAG_S);
 			WHEN EX_BEQ =>
-				if (DataRegOutEXALU(FLAG_Z) = '1') then 
+				if (DataRegOutEXALU(FLAG_Z) = '1') then
 					DataRegInEXALU <= "ZZZZZZZZZZZZZZZZ" & jumpAddress;
 					BranchEXALUtoSM.branch_taken <= '1';
 					BranchEXALUtoSM.enable <= '1';
@@ -1136,7 +1140,7 @@ begin
 					WAIT FOR 1 ns;
 				end if;
 			WHEN EX_BNE =>
-				if (DataRegOutEXALU(FLAG_Z) = '0') then 
+				if (DataRegOutEXALU(FLAG_Z) = '0') then
 					DataRegInEXALU <= "ZZZZZZZZZZZZZZZZ" & jumpAddress;
 					BranchEXALUtoSM.branch_taken <= '1';
 					BranchEXALUtoSM.enable <= '1';
@@ -1153,7 +1157,7 @@ begin
 					WAIT FOR 1 ns;
 				end if;
 			WHEN EX_BEQZ =>
-				if (DataRegOutEXALU(FLAG_Z) = '1') then 
+				if (DataRegOutEXALU(FLAG_Z) = '1') then
 					DataRegInEXALU <= "ZZZZZZZZZZZZZZZZ" & jumpAddress;
 					BranchEXALUtoSM.branch_taken <= '1';
 					BranchEXALUtoSM.enable <= '1';
@@ -1170,7 +1174,7 @@ begin
 					WAIT FOR 1 ns;
 				end if;
 			WHEN EX_BNEZ =>
-				if (DataRegOutEXALU(FLAG_Z) = '0') then 
+				if (DataRegOutEXALU(FLAG_Z) = '0') then
 					DataRegInEXALU <= "ZZZZZZZZZZZZZZZZ" & jumpAddress;
 					BranchEXALUtoSM.branch_taken <= '1';
 					BranchEXALUtoSM.enable <= '1';
@@ -1187,7 +1191,7 @@ begin
 					WAIT FOR 1 ns;
 				end if;
 			WHEN EX_BFPT =>
-				if (DataRegOutEXALU(FLAG_Z) = '0') then 
+				if (DataRegOutEXALU(FLAG_Z) = '0') then
 					DataRegInEXALU <= "ZZZZZZZZZZZZZZZZ" & jumpAddress;
 					BranchEXALUtoSM.branch_taken <= '1';
 					BranchEXALUtoSM.enable <= '1';
@@ -1204,7 +1208,7 @@ begin
 					WAIT FOR 1 ns;
 				end if;
 			WHEN EX_BFPF =>
-				if (DataRegOutEXALU(FLAG_Z) = '1') then 
+				if (DataRegOutEXALU(FLAG_Z) = '1') then
 					DataRegInEXALU <= "ZZZZZZZZZZZZZZZZ" & jumpAddress;
 					BranchEXALUtoSM.branch_taken <= '1';
 					BranchEXALUtoSM.enable <= '1';
@@ -1221,19 +1225,19 @@ begin
 					WAIT FOR 1 ns;
 				end if;
 			WHEN OTHERS =>
-				report "Error: la operación para utilizar el registro de banderas de la ALU no es válida"
+				report "Error: la operaciï¿½n para utilizar el registro de banderas de la ALU no es vï¿½lida"
 				severity FAILURE;
-		END CASE;	
-	END getAndUseFlagsRegister;	
+		END CASE;
+	END getAndUseFlagsRegister;
 
-	
-	BEGIN 
+
+	BEGIN
 		if (First) then
 			First := false;
 			BranchEXALUtoSM.enable <= '0';
-			EnableRegEXALURd <= '0'; 
+			EnableRegEXALURd <= '0';
 			EnableRegEXALUWr <= '0';
-			EnableRegEXALUIP <= '0';	
+			EnableRegEXALUIP <= '0';
 			DoneEXALU <= '0';
 			WAIT FOR 1 ns;
 		end if;
@@ -1241,19 +1245,19 @@ begin
 		DoneEXALU <= '0';
 		Op := to_integer(unsigned(IDtoEXALU.op));
 		if (Op /= EX_NULL) then
-			alu; 
+			alu;
 			setFlagsRegister;
 			if (needFlags) then
 				getAndUseFlagsRegister;
-			end if;	
+			end if;
 			if (not isJumpOp) then
 				DataEXALUtoWB <= ResBin(31 downto 0);
 			end if;
 		end if;
-		DoneEXALU <= '1';	
+		DoneEXALU <= '1';
 	END PROCESS Main;
-	
-	
+
+
 end EXECUTE_ALU_ARCHITECTURE;
 
 
