@@ -34,7 +34,7 @@ PACKAGE const_ensamblador is
 	CONSTANT CANT_VARIABLES:	INTEGER := 10;
 	CONSTANT CANT_OFFSETS:		INTEGER := 10;
 	CONSTANT CANT_INSTTD:		INTEGER := 13;
-	CONSTANT CANT_INSTAR:		INTEGER := 20;
+	CONSTANT CANT_INSTAR:		INTEGER := 21;
 	CONSTANT CANT_INSTLD:		INTEGER := 16;
 	CONSTANT CANT_INSTTC:		INTEGER := 7;
 	CONSTANT CANT_INSTCT:		INTEGER := 2;
@@ -68,11 +68,11 @@ PACKAGE const_ensamblador is
 	CONSTANT INSTTD_CODES:		insttd_code_array(1 to CANT_INSTTD) := (LB, SB, LH, SH, LW, SW, TDA_1819.repert_cpu.LF, SF, MFF, MFR, MRF, TF, TI);
 	CONSTANT INSTTD_SIZES:		insttd_size_array(1 to CANT_INSTTD) := (6, 6, 6, 6, 6, 6, 6, 6, 4, 4, 4, 4, 4);	
 	
-	CONSTANT INSTAR_NAMES: 		instar_name_array(1 to CANT_INSTAR) := ("dadd  ", "daddi ", "daddu ", "daddui", "addf  ", "dsub  ", "dsubu ", "subf  ", "dmul  ", "dmulu ", "mulf  ", "ddiv  ", "ddivu ", "divf  ", "slt   ", "slti  ", "ltf   ", "lef   ", "eqf   ", "neg   ");
-	CONSTANT INSTAR_CODES:		instar_code_array(1 to CANT_INSTAR) := (DADD, DADDI, DADDU, DADDUI, ADDF, DSUB, DSUBU, SUBF, DMUL, DMULU, MULF, DDIV, DDIVU, DIVF, SLT, SLTI, LTF, LEF, EQF, NEGR);
-	CONSTANT INSTAR_SIZES:		instar_size_array(1 to CANT_INSTAR) := (5, 8, 5, 8, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 8, 4, 4, 4, 4);
+	CONSTANT INSTAR_NAMES: 		instar_name_array(1 to CANT_INSTAR) := ("dadd  ", "daddi ", "daddu ", "daddui", "addf  ", "dsub  ", "dsubu ", "dsubi ", "subf  ", "dmul  ", "dmulu ", "mulf  ", "ddiv  ", "ddivu ", "divf  ", "slt   ", "slti  ", "ltf   ", "lef   ", "eqf   ", "neg   ");
+	CONSTANT INSTAR_CODES:		instar_code_array(1 to CANT_INSTAR) := (DADD, DADDI, DADDU, DADDUI, ADDF, DSUB, DSUBU, DSUBI, SUBF, DMUL, DMULU, MULF, DDIV, DDIVU, DIVF, SLT, SLTI, LTF, LEF, EQF, NEGR);
+	CONSTANT INSTAR_SIZES:		instar_size_array(1 to CANT_INSTAR) := (5, 8, 5, 8, 5, 5, 5, 8, 5, 5, 5, 5, 5, 5, 5, 5, 8, 4, 4, 4, 4);
 	
-	CONSTANT INSTLD_NAMES: 		instld_name_array(1 to CANT_INSTLD) := ("and  ", "andi ", "or   ", "ori  ", "xor  ", "xori ", "xnor ", "not  ", "dsl  ", "dsli ", "dsr  ", "dsri ", "dsls ", "dslsi", "dsrs ", "dsrsi");
+	CONSTANT INSTLD_NAMES: 		instld_name_array(1 to CANT_INSTLD) := ("and  ", "andi ", "or   ", "ori  ", "xor  ", "xori ", "xnorr", "not  ", "dsl  ", "dsli ", "dsr  ", "dsri ", "dsls ", "dslsi", "dsrs ", "dsrsi");
 	CONSTANT INSTLD_CODES:		instld_code_array(1 to CANT_INSTLD) := (ANDR, ANDI, ORR, ORI, XORR, XORI, XNORR, NOTR, DSL, DSLI, DSR, DSRI, DSLS, DSLSI, DSRS, DSRSI);
 	CONSTANT INSTLD_SIZES:		instld_size_array(1 to CANT_INSTLD) := (5, 8, 5, 8, 5, 8, 5, 4, 5, 8, 5, 8, 5, 8, 5, 8);
 	

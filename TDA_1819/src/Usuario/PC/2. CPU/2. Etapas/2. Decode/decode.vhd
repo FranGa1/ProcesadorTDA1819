@@ -724,6 +724,24 @@ begin
 					WAIT FOR 1 ns;
 					IDtoEX.op2 <= DataRegOutID(31 downto 0);
 				end if;
+			WHEN DSUBI =>
+				IDtoEX.op <= std_logic_vector(to_unsigned(EX_SUB, IDtoEX.op'length));
+				IDtoEX.fp <= '0';
+				IDtoEX.sign <= '1';
+				IDtoWB.datasize <= std_logic_vector(to_unsigned(4, IDtoWB.datasize'length));
+				IDtoWB.source <= std_logic_vector(to_unsigned(WB_EX, IDtoWB.source'length));
+				rdAux := to_integer(unsigned(IFtoIDLocal.package1(7 downto 0))) + 1;
+				rfAux := to_integer(unsigned(IFtoIDLocal.package1(15 downto 8)));
+				IDtoEX.op2(7 downto 0) <= IFtoIDLocal.package1(23 downto 16);
+				IDtoEX.op2(31 downto 8) <= IFtoIDLocal.package2(23 downto 0);
+				IDtoWB.mode <= std_logic_vector(to_unsigned(rdAux, IDtoWB.mode'length));
+				IdRegID <= std_logic_vector(to_unsigned(rfAux, IdRegID'length));
+				SizeRegID <= std_logic_vector(to_unsigned(4, SizeRegID'length));
+				EnableRegID <= '1';
+				WAIT FOR 1 ns;
+				EnableRegID <= '0';
+				WAIT FOR 1 ns;
+				IDtoEX.op1 <= DataRegOutID(31 downto 0);
 			WHEN SUBF =>
 				IDtoEX.op <= std_logic_vector(to_unsigned(EX_SUB, IDtoEX.op'length));
 				IDtoEX.fp <= '1';
@@ -1146,32 +1164,6 @@ begin
 					WAIT FOR 1 ns;
 					IDtoEX.op2 <= DataRegOutID(31 downto 0);
 				end if;
-			WHEN XNORR =>
-				IDtoEX.op <= std_logic_vector(to_unsigned(EX_XNOR, IDtoEX.op'length));
-				IDtoEX.fp <= '0';
-				IDtoEX.sign <= '0';
-				IDtoWB.datasize <= std_logic_vector(to_unsigned(4, IDtoWB.datasize'length));
-				IDtoWB.source <= std_logic_vector(to_unsigned(WB_EX, IDtoWB.source'length));
-				rdAux := to_integer(unsigned(IFtoIDLocal.package1(7 downto 0))) + 1;
-				rfAux := to_integer(unsigned(IFtoIDLocal.package1(15 downto 8)));
-				rgAux := to_integer(unsigned(IFtoIDLocal.package1(23 downto 16)));
-				IDtoWB.mode <= std_logic_vector(to_unsigned(rdAux, IDtoWB.mode'length));
-				IdRegID <= std_logic_vector(to_unsigned(rfAux, IdRegID'length));
-				SizeRegID <= std_logic_vector(to_unsigned(4, SizeRegID'length));
-				EnableRegID <= '1';
-				WAIT FOR 1 ns;
-				EnableRegID <= '0';
-				WAIT FOR 1 ns;
-				IDtoEX.op1 <= DataRegOutID(31 downto 0);
-				if (StallRAW = '0') then
-					IdRegID <= std_logic_vector(to_unsigned(rgAux, IdRegID'length));
-					SizeRegID <= std_logic_vector(to_unsigned(4, SizeRegID'length));
-					EnableRegID <= '1';
-					WAIT FOR 1 ns;
-					EnableRegID <= '0';
-					WAIT FOR 1 ns;
-					IDtoEX.op2 <= DataRegOutID(31 downto 0);
-				end if;
 			WHEN XORI =>
 				IDtoEX.op <= std_logic_vector(to_unsigned(EX_XOR, IDtoEX.op'length));
 				IDtoEX.fp <= '0';
@@ -1516,6 +1508,32 @@ begin
 				IDtoEX.op1 <= DataRegOutID(31 downto 0);
 				if (StallRAW = '0') and (Pipelining) then
 					StallBrEX <= '1';
+				end if;
+			WHEN XNORR =>
+				IDtoEX.op <= std_logic_vector(to_unsigned(EX_XNOR, IDtoEX.op'length));
+				IDtoEX.fp <= '0';
+				IDtoEX.sign <= '0';
+				IDtoWB.datasize <= std_logic_vector(to_unsigned(4, IDtoWB.datasize'length));
+				IDtoWB.source <= std_logic_vector(to_unsigned(WB_EX, IDtoWB.source'length));
+				rdAux := to_integer(unsigned(IFtoIDLocal.package1(7 downto 0))) + 1;
+				rfAux := to_integer(unsigned(IFtoIDLocal.package1(15 downto 8)));
+				rgAux := to_integer(unsigned(IFtoIDLocal.package1(23 downto 16)));
+				IDtoWB.mode <= std_logic_vector(to_unsigned(rdAux, IDtoWB.mode'length));
+				IdRegID <= std_logic_vector(to_unsigned(rfAux, IdRegID'length));
+				SizeRegID <= std_logic_vector(to_unsigned(4, SizeRegID'length));
+				EnableRegID <= '1';
+				WAIT FOR 1 ns;
+				EnableRegID <= '0';
+				WAIT FOR 1 ns;
+				IDtoEX.op1 <= DataRegOutID(31 downto 0);
+				if (StallRAW = '0') then
+					IdRegID <= std_logic_vector(to_unsigned(rgAux, IdRegID'length));
+					SizeRegID <= std_logic_vector(to_unsigned(4, SizeRegID'length));
+					EnableRegID <= '1';
+					WAIT FOR 1 ns;
+					EnableRegID <= '0';
+					WAIT FOR 1 ns;
+					IDtoEX.op2 <= DataRegOutID(31 downto 0);
 				end if;
 			WHEN NOP =>
 				WAIT FOR 1 ns;

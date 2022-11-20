@@ -66,6 +66,8 @@ PACKAGE repert_cpu is
 	CONSTANT DSUB:			std_logic_vector(7 downto 0) := "00011101";
 	-- DSUBU rd, rf, rg
 	CONSTANT DSUBU:			std_logic_vector(7 downto 0) := "00011110";	
+	-- DSUBI rd, rf, N
+	CONSTANT DSUBI:			std_logic_vector(7 downto 0) := "00101100";
 	-- SUBF fd, ff, fg
 	CONSTANT SUBF:			std_logic_vector(7 downto 0) := "00011111";
 	-- DMUL rd, rf, rg

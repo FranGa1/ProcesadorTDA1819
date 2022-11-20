@@ -117,7 +117,7 @@ begin
 		jumpAddress := IDtoEXALU.address;
 		needFlags := false;
 		isJumpOp := false;
-		Sign := IDtoEXALU.sign;
+		Sign := IDtoEXALU.sign;		 
 		if (Sign = '0') then
 			Uop1 := unsigned(IDtoEXALU.op1);
 			Uop2 := unsigned(IDtoEXALU.op2);
@@ -142,9 +142,7 @@ begin
 				WHEN EX_OR =>
 					Ures := Uop1 or Uop2;
 				WHEN EX_XOR =>
-					Ures := not (Uop1 xor Uop2);
-				WHEN EX_XNOR =>
-					Ures := not (Uop1 xor Uop2);
+					Ures := (Uop1 xor Uop2);
 				WHEN EX_NOT =>
 					Ures := not(Uop1);
 				WHEN EX_DSL =>
@@ -177,6 +175,8 @@ begin
 					Ures := Uop1;
 					needFlags := true;
 					isJumpOp := true;
+				WHEN EX_XNOR =>
+					Ures := not(Uop1 xor Uop2);
 				WHEN OTHERS =>
 					report "Error: la operaci�n a ejecutar en la ALU no es v�lida"
 					severity FAILURE;
@@ -206,8 +206,6 @@ begin
 					Sres := Sop1 or Sop2;
 				WHEN EX_XOR =>
 					Sres := Sop1 xor Sop2;
-				WHEN EX_XNOR =>
-					Sres := not (Sop1 xor Sop2);
 				WHEN EX_NOT =>
 					Sres := not(Sop1);
 				WHEN EX_DSL =>
@@ -242,6 +240,8 @@ begin
 					Sres := Sop1;
 					needFlags := true;
 					isJumpOp := true;
+				WHEN EX_XNOR =>
+					Sres := not (Sop1 xor Sop2);
 				WHEN OTHERS =>
 					report "Error: la operaci�n a ejecutar en la ALU no es v�lida"
 					severity FAILURE;

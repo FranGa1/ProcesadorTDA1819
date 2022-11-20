@@ -8,7 +8,7 @@ B:		.byte	0b10111010
 		andi r4, r1, 0b10111010
 		or r5, r1, r2
 		ori r6, r1, 0b10111010
-		xor r7, r1, r2
+		xnor r7, r1, r2
 		xori r8, r1, 0b10111010
 		not r9, r1
 		halt
