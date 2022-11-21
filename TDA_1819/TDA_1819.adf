@@ -61,6 +61,12 @@ HierarchyInformation=usuario|USUARIO_ARCHITECTURE|0
 ShowHide=ShowTopLevel
 Selected=
 [Files]
+/waveform.asdb=-1
+/waveform.awc=-1
+/cauce_no_segmentado.asdb=-1
+/cauce_no_segmentado.awc=-1
+/cauce_segmentado.asdb=-1
+/cauce_segmentado.awc=-1
 Packages/const_reloj.vhd=-1
 Packages/tipos_cpu.vhd=-1
 Packages/tipos_memoria.vhd=-1
@@ -100,6 +106,12 @@ Usuario\PC\2. CPU\7. Registros/registros.vhd=-1
 Usuario\PC\3. Buses_Admin/buses_admin.vhd=-1
 Usuario\PC\4. Memoria/memoria.vhd=-1
 [Files.Data]
+.\src\waveform.asdb=Accelerated Waveform File
+.\src\waveform.awc=Accelerated Waveform Configuration
+.\src\cauce_no_segmentado.asdb=Accelerated Waveform File
+.\src\cauce_no_segmentado.awc=Accelerated Waveform Configuration
+.\src\cauce_segmentado.asdb=Accelerated Waveform File
+.\src\cauce_segmentado.awc=Accelerated Waveform Configuration
 .\src\Packages\const_reloj.vhd=VHDL Source Code
 .\src\Packages\tipos_cpu.vhd=VHDL Source Code
 .\src\Packages\tipos_memoria.vhd=VHDL Source Code

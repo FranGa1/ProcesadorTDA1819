@@ -1,4 +1,4 @@
-66
+67
 ~E 1 "../src/Usuario/PC/2. CPU/4. Atascos/atascos.vhd" 35 atascos
 ~A 1 "../src/Usuario/PC/2. CPU/4. Atascos/atascos.vhd" 70 ATASCOS_ARCHITECTURE
 ~E 1 "../src/Usuario/PC/3. Buses_Admin/buses_admin.vhd" 57 buses_admin
