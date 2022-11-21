@@ -1,27 +1,27 @@
 
 -- Entidad "usuario":
--- Descripción: Aquí se define el banco de pruebas (testbench) con el objetivo de que 
--- el usuario pueda verificar el funcionamiento de la simulación de la PC. Para ello, 
+-- Descripciï¿½n: Aquï¿½ se define el banco de pruebas (testbench) con el objetivo de que 
+-- el usuario pueda verificar el funcionamiento de la simulaciï¿½n de la PC. Para ello, 
 -- debe escribir previamente un programa en el lenguaje Assembler para su ensamblaje 
--- y ejecución y definir las constantes generic declaradas en esta entidad para
+-- y ejecuciï¿½n y definir las constantes generic declaradas en esta entidad para
 -- especificar la arquitectura del procesador. El repertorio de instrucciones
 -- soportado por esta CPU se encuentra determinado en el paquete "repert_cpu".
--- Parámetros:
+-- Parï¿½metros:
 -- ProgName: Contiene el nombre del programa a ser ensamblado y ejecutado por la PC.
--- El usuario debe acordarse de incluir la extensión ".asm" y de ubicar el archivo
+-- El usuario debe acordarse de incluir la extensiï¿½n ".asm" y de ubicar el archivo
 -- en la carpeta "Assembler", dentro del espacio de trabajo (Workspace) del proyecto.
--- Pipelining: Determina si la CPU incluida en la PC simulada presentará (valor "true")
--- o no (valor "false") una segmentación en su cauce. Naturalmente debería esperarse una
+-- Pipelining: Determina si la CPU incluida en la PC simulada presentarï¿½ (valor "true")
+-- o no (valor "false") una segmentaciï¿½n en su cauce. Naturalmente deberï¿½a esperarse una
 -- notoria mejora en el rendimiento de un procesador segmentado respecto a uno secuencial.
--- Cores: Esta funcionalidad aún no se encuentra implementada, por lo que el valor asignado
--- a este parámetro resulta irrelevante. No obstante, cabe mencionar que aquí se estaría
--- definiendo la cantidad de núcleos que posee la arquitectura multi-core.
+-- Cores: Esta funcionalidad aï¿½n no se encuentra implementada, por lo que el valor asignado
+-- a este parï¿½metro resulta irrelevante. No obstante, cabe mencionar que aquï¿½ se estarï¿½a
+-- definiendo la cantidad de nï¿½cleos que posee la arquitectura multi-core.
 -- Procesos:
--- Main: Su función es habilitar el ensamblador de la PC para que comience a llevar a cabo
--- su tarea. Una vez completada, procede a recibir la señal de finalización del ensamblaje
--- para informar este evento al usuario. Un fenómeno similar ocurre con la ejecución 
--- propiamente dicha del programa: cuando la CPU termina su trabajo, envía una nueva señal 
--- a este proceso para que el mismo realice al usuario la notificación correspondiente.
+-- Main: Su funciï¿½n es habilitar el ensamblador de la PC para que comience a llevar a cabo
+-- su tarea. Una vez completada, procede a recibir la seï¿½al de finalizaciï¿½n del ensamblaje
+-- para informar este evento al usuario. Un fenï¿½meno similar ocurre con la ejecuciï¿½n 
+-- propiamente dicha del programa: cuando la CPU termina su trabajo, envï¿½a una nueva seï¿½al 
+-- a este proceso para que el mismo realice al usuario la notificaciï¿½n correspondiente.
 
 
 library TDA_1819;
@@ -40,7 +40,7 @@ entity usuario is
 	-- Generic declarations of the tested unit
 	generic (
 		ProgName	: STRING := "ejercicio3.asm";
-		Pipelining	: BOOLEAN := true;
+		Pipelining	: BOOLEAN := false;
 		Cores 		: INTEGER := 1);  	
 			
 end usuario;

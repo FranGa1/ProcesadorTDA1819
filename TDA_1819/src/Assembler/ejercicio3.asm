@@ -17,11 +17,9 @@ RES_XNOR2:	.hword	2714
 		beqz r7, RES_NEG 
 RES_POS:	xnorr r5, r3, r8 # Caso en que r1 es mayor que r2
 		xnorr r6, r4, r9
-		neg r10, r4
 		jmp fin
 RES_NEG:	xnorr r5, r3, r9 # Caso en que r1 es menor que r2
 		xnorr r6, r4, r8
-		neg r10, r3
 fin:	sh r3, RES_SUB1(r0)
 		sh r4, RES_SUB2(r0)
 		sh r5, RES_XNOR1(r0)

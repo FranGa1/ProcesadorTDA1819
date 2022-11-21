@@ -256,9 +256,9 @@ FileTimeLow=61418520
 Status=Compiled
 FileTimeHigh=30996582
 [COMPILESTATUS|.\src\Usuario\usuario.vhd]
-FileTimeLow=36801190
+FileTimeLow=3080085102
 Status=Compiled
-FileTimeHigh=30997770
+FileTimeHigh=30997836
 [CACHEDOC|Aldec.Hde.HdePlugIn.7|.\TDA_1819\src/Packages/const_buses.vhd|]
 CurrentLine=0
 CurrentColumn=0
